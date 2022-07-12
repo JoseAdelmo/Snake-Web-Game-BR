@@ -1,1 +1,1 @@
-https://joseadelmo.github.io/Snake-Web-Game-BR/
+https://joseadelmo.github.io/Snake-Web-Game-BR
