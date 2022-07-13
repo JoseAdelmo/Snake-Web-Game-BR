@@ -1,99 +1,101 @@
-<!DOCTYPE  html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Snake Eater Game</title>
-    </head>
-    <! -- e se termina com -->
-    <body style = "background-color: rgba(173, 8, 249, 0.926);">
-    <canvas id = "stage" width = "1200" height = "600"></canvas>
-    <script type="text/javascript">
 
-        window.onload = function(){
-            var stage = document.getElementById('stage');
-            var ctx = stage.getContext("2d");
-            document.addEventListener("keydown", keyPush);
-            setInterval(game,85);
+<head>
+    <title>Snake Eater Game</title>
+</head>
+<! -- e se termina com -->
 
-            const vel= 1;
+    <body style="background-color: rgba(173, 8, 249, 0.926);">
+        <canvas id="stage" width="1200" height="600"></canvas>
+        <script type="text/javascript">
 
-            var vx = vy = 0;
-            var px = 20;
-            var py = 35;
-            var tp = 25;
-            var qp = 20;
-            
-            var ax = ay = 15;IDBCursor
+            window.onload = function () {
+                var stage = document.getElementById('stage');
+                var ctx = stage.getContext("2d");
+                document.addEventListener("keydown", keyPush);
+                setInterval(game, 85);
 
-            var trail=[];
-            tail = 5
+                const vel = 1;
 
-            function game() {
-                px += vx;
-                py += vy;
+                var vx = vy = 0;
+                var px = 20;
+                var py = 35;
+                var tp = 25;
+                var qp = 20;
 
-                if(px<0){
-                    px=qp-1
-                }
-                if(px > qp -1){
-                    px = 0
-                }
-                if(py<0){
-                    py=qp-1
-                }
-                if(py > qp-1){
-                    py=0
-                }
+                var ax = ay = 15; IDBCursor
 
-                ctx.fillStyle = "black";
-                ctx.fillRect(0,0,stage.width,stage.height);
+                var trail = [];
+                tail = 5
 
-                ctx.fillStyle= "blue";
-                ctx.fillRect(ax*tp,ay*tp,tp,tp);
+                function game() {
+                    px += vx;
+                    py += vy;
 
-                ctx.fillStyle="green"
-                for(var i=0;i < trail.length;i++){
-                    ctx.fillRect(trail[i].x * tp,trail[i].y*tp,tp-1,tp-1 );
+                    if (px < 0) {
+                        px = qp - 1
+                    }
+                    if (px > qp - 1) {
+                        px = 0
+                    }
+                    if (py < 0) {
+                        py = qp - 1
+                    }
+                    if (py > qp - 1) {
+                        py = 0
+                    }
 
-                    if(trail[i].x== px && trail[i].y==py)
-                    {
-                        vx =vy =0
-                        tail =5
+                    ctx.fillStyle = "black";
+                    ctx.fillRect(0, 0, stage.width, stage.height);
+
+                    ctx.fillStyle = "blue";
+                    ctx.fillRect(ax * tp, ay * tp, tp, tp);
+
+                    ctx.fillStyle = "green"
+                    for (var i = 0; i < trail.length; i++) {
+                        ctx.fillRect(trail[i].x * tp, trail[i].y * tp, tp - 1, tp - 1);
+
+                        if (trail[i].x == px && trail[i].y == py) {
+                            vx = vy = 0
+                            tail = 5
+                        }
+                    }
+
+                    trail.push({ x: px, y: py })
+                    while (trail.length > tail) {
+                        trail.shift()
+                    }
+                    if (ax == px && ay == py) {
+                        tail++;
+                        ax = Math.floor(Math.random() * qp);
+                        ay = Math.floor(Math.random() * qp);
                     }
                 }
-
-                trail.push({ x:px, y:py})
-                while(trail.length> tail){
-                    trail.shift()
-                }
-                if(ax==px && ay==py){
-                    tail++;
-                    ax = Math.floor(Math.random()*qp);
-                    ay = Math.floor(Math.random()*qp);
-                }
-            }
-            function keyPush(event){
-                switch(event.keyCode){
-                    case 37:
-                        vx=-vel;
-                        vy= 0
-                        break;
-                             case 38:
-                                vx = 0;
-                                vy = -vel;
-                                break;
-                                case 39:
-                                    vx= vel;
-                                    vy=0
-                                    break;
-                                    case 40:
-                                        vx = 0
-                                        vy = vel;
-                                        break;
-                                        default:
-                                        break;
+                function keyPush(event) {
+                    switch (event.keyCode) {
+                        case 37:
+                            vx = -vel;
+                            vy = 0
+                            break;
+                        case 38:
+                            vx = 0;
+                            vy = -vel;
+                            break;
+                        case 39:
+                            vx = vel;
+                            vy = 0
+                            break;
+                        case 40:
+                            vx = 0
+                            vy = vel;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
-        }
-    </script>
+        </script>
     </body>
+
 </html>
